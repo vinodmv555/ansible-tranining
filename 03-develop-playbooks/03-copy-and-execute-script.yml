@@ -1,0 +1,15 @@
+---
+- name: copy and execute script 
+  hosts: test  # Inventory group name is test
+
+  tasks:
+    - name: copy the script
+      copy:
+        src: script.sh
+        dest: /tmp/
+        owner: test
+        group: test
+        mode: '0755'
+
+    - name: execute the script 
+      command: /tmp/script.sh

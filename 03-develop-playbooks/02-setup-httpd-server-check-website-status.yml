@@ -1,0 +1,34 @@
+---
+# Multiple Play example
+# First play for setting up the httpd server
+- name: Install and configure httpd server
+  hosts: 172.31.44.186
+  # Privilege escalation is not required since playbook run as root
+
+  tasks:
+    - name: install httpd 
+      yum:
+        name: httpd
+        state: present
+
+    - name: copy index.html 
+      copy:
+        src: index.html
+        dest: /var/www/html/
+
+    - name: start and enable httpd service 
+      systemd:
+        name: httpd
+        state: started 
+        enabled: yes
+
+# Second Play for check the status of the website 
+- name: Check the website status
+  hosts: localhost  #Playbook runs on Controlnode (localhost)
+
+  tasks:
+    - name: check the status code of the website
+      uri:
+        url: http://172.31.44.186
+
+

@@ -1,0 +1,10 @@
+---
+- name: Fetch suoders file from managed hosts to control node
+  hosts: test
+  remote_user: root
+
+  tasks:
+    - name: fetch sudoers file from managed hosts
+      fetch:
+        src: /etc/sudoers
+        dest: /tmp/suoders-backup/

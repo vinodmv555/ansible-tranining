@@ -1,0 +1,10 @@
+---
+- name: create a folder in /opt
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: create a folder
+      file:
+        path: /opt/test-directory
+        state: directory

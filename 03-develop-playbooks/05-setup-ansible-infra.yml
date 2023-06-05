@@ -1,0 +1,31 @@
+---
+- name: Setup Ansible Infra
+  hosts: all
+  # User infor and Privilege escalation is not required since playbook run as root
+
+#Taks Involved in Playbook 
+#1. create a user for running the ansible playbook - ansible-user
+#2. set a password for ansible-user 
+#3. Generate ssh key 
+#4. Setup 'password less' authentication from control node to all managed hosts 
+#5. modify suoders file for privilege escalation for ansible user-user 
+
+  tasks:
+    - name: create the user ansible-user
+      user:
+        name: ansible-user
+        state: present
+        password: "{{ 'admin123' | password_hash('sha512') }}"
+        generate_ssh_key: true
+
+    - name: setup password-less auth
+      authorized_key:
+        user: ansible-user
+        state: present
+        key: "{{ lookup('file', '/home/ansible-user/.ssh/id_rsa.pub') }}"
+
+    - name: Add the entry to sudoers file
+      lineinfile:
+        path: /etc/sudoers
+        backup: yes
+        line: 'ansible-user   ALL=(ALL)       NOPASSWD: ALL'
