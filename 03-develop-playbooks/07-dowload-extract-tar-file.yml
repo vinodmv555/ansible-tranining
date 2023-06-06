@@ -1,0 +1,21 @@
+---
+- name: download tar file and extract
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: create a directory
+      file:
+        path: /opt/node-exporter
+        state: directory
+
+    - name: download the tar file 
+      get_url:
+        url: https://github.com/prometheus/node_exporter/releases/download/v1.6.0/node_exporter-1.6.0.linux-386.tar.gz
+        dest: /opt/node-exporter
+
+    - name: Extract the file 
+      unarchive:
+        src: /opt/node-exporter/node_exporter-1.6.0.linux-386.tar.gz
+        dest: /opt/node-exporter/
+        remote_src: yes
