@@ -1,0 +1,13 @@
+---
+- name: when condition example
+  hosts: test
+  become: yes
+  #vars:
+  #  pkg_name: httpd
+
+  tasks:
+    - name: install the Package {{ pkg_name }}
+      yum:
+        name: "{{ pkg_name }}"
+        state: latest 
+      when: pkg_name is defined

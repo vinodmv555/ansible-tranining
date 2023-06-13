@@ -1,0 +1,31 @@
+---
+- name: Magic variable example
+  hosts: test
+  become: yes
+  become_user: root
+  gather_facts: false 
+
+  tasks:
+    - name: Print hostname
+      debug:
+        var: inventory_hostname 
+
+    - name: Print using debug msg
+      debug:
+        msg: "{{ inventory_hostname }}"
+
+    - name: Print group name
+      debug:
+        var: group_names
+
+    - debug:
+        var: ansible_inventory_sources
+
+    - debug:
+        var: ansible_play_hosts
+
+    - debug:
+        var: ansible_version
+
+    - debug:
+        var: inventory_file

@@ -1,0 +1,13 @@
+---
+- name: register-debug-example
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: List the files under /tmp
+      command: ls -l /tmpppppppp
+      register: list_tmp
+
+    - name: Print the result
+      debug:
+        var: list_tmp.stdout_lines

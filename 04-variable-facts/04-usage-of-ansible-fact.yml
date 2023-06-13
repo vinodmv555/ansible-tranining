@@ -1,0 +1,20 @@
+---
+- name: usage of ansible facts
+  hosts: test
+  
+  tasks:
+    - name: print the host name
+      debug:
+        msg: "Hostname ===> {{ ansible_hostname }}"
+
+    - name: print the hostname
+      debug:
+        msg: "Hostname ==> {{ ansible_facts['hostname'] }}"
+
+    - name: print the FQDN 
+      debug:
+        var: ansible_fqdn
+
+    - name: print the FQDN
+      debug:
+        var: ansible_facts['fqdn']

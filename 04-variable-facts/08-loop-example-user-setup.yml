@@ -1,0 +1,20 @@
+---
+- name: user creation
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: setup users
+      user: 
+        name: "{{ item.name }}"
+        home: "{{ item.home }}"
+        shell: "{{ item.shell }}"
+        state: present
+      loop: 
+        - name: vinod
+          shell: /bin/bash
+          home: /home/vinod
+
+        - name: smitha
+          shell: /bin/sh
+          home: /home/smitha-sm

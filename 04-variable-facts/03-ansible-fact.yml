@@ -1,0 +1,10 @@
+---
+- name: Sample playbook for testing ansible facts
+  hosts: test
+  become: yes
+  gather_facts: false
+
+  tasks:
+    - name: Print the OS version of the servers in the group test
+      debug:
+        msg: "OS Version ==> {{ ansible_distribution_major_version }}"

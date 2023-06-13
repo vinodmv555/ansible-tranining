@@ -1,0 +1,25 @@
+---
+- name: Decalre a array
+  hosts: localhost
+  vars:
+    users:
+      vijayv:
+        first_name: vijay
+        last_name: v
+        home_dir: /home/vijay
+      vinodmv:
+        first_name: vinod
+        last_name: mv
+        home_dir: /home/vinod
+  
+  tasks:
+    - name: print values
+      debug:
+        var: users.vijayv.first_name
+
+    - debug:
+        var: users.vijayv.home_dir
+
+    - debug:
+        msg: "{{ users.vinodmv.last_name }}"
+          
