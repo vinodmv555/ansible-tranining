@@ -1,0 +1,14 @@
+---
+- name: failed when example
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: execte the script 
+      script: script.sh
+      register: script_result
+      failed_when: "'password' in script_result.stdout"
+
+    - name: print result 
+      debug:
+        var: script_result.stdout_lines

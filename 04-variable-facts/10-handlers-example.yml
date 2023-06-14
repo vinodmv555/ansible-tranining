@@ -1,0 +1,22 @@
+---
+- name: Handlers example
+  hosts: 172.31.44.186
+  become: yes
+
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: present
+
+    - name: copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/
+      notify: restart-httpd
+
+  handlers:
+    - name: restart-httpd
+      service:
+        name: httpd
+        state: restarted

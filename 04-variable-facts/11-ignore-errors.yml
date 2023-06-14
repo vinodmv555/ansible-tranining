@@ -1,0 +1,15 @@
+---
+- name: ignore error example
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: install a package
+      yum:
+        name: just-a-pkg
+        state: present
+      ignore_errors: true
+
+    - name: run a command
+      command: ls -l /tmp/abc.txt
+      ignore_errors: true
