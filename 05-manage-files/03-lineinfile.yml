@@ -1,0 +1,11 @@
+---
+- name: linein in file example
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: insert a line 
+      lineinfile:
+        path: /opt/file2
+        line: "We are working on lineinfile"
+        state: present # default is present 

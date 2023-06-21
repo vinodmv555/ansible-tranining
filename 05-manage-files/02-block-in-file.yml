@@ -1,0 +1,24 @@
+---
+- name: blockinfile exmaple
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: Add a block to a file
+      blockinfile:
+        path: /opt/file1
+        marker_begin: "# APP2"
+        marker_end: "# APP2"
+        block: |
+          line1: value1
+          line2: value2
+          line3: value3
+          line4: value4
+          line5: value5
+        backup: yes
+
+    - name: Add a block from a file
+      blockinfile:
+        dest: /opt/file2
+        create: yes
+        block: "{{ lookup('file', 'block.txt') }}"

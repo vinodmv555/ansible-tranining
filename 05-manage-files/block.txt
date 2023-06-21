@@ -1,0 +1,3 @@
+Ansible training
+session, started on may
+started with basics

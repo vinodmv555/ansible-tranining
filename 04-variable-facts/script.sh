@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "password is generated"
+#echo "failed to execute the script"
+echo "ok"

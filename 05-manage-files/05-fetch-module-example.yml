@@ -1,0 +1,12 @@
+---
+- name: fetch module example
+  hosts: test
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: copy the files from remote servers
+      fetch:
+        src: /opt/file1
+        dest: /tmp/backup/file1-{{ ansible_hostname }}
+        flat: yes

@@ -1,0 +1,10 @@
+---
+- name: synchonrize module usage
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: copy /tmp file system into remote servers
+      synchronize:
+        src: /home/
+        dest: /opt/

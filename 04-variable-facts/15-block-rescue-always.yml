@@ -1,0 +1,23 @@
+---
+- name: block rescue example
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: sample block
+      block:
+        - name: block task | restart the service 
+          service:
+            name: httpdd
+            state: restarted
+
+      rescue:
+        - name: rescue task | Print a message
+          debug:
+            msg: "failed to execute service"
+
+      always:
+        - name: always task | Print a message
+          debug:
+            msg: "This task runs always"
+      

@@ -1,0 +1,23 @@
+---
+- name: failed when example
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: execte the script
+      script: script.sh
+      register: script_result
+    
+    - name: print script output
+      debug:
+        var: script_result.stdout
+
+    - name: Fail the playbook 
+      fail:
+        msg: "Password failed to generate"
+      when: "'failed' in script_result.stdout"
+
+    - name: test task
+      debug:
+        msg: "Test task"
+    

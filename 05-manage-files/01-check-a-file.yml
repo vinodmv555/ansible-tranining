@@ -1,0 +1,28 @@
+---
+- name: Create and check the stat file 
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: create a file 
+      file:
+        path: /opt/file1
+        owner: test01
+        group: test01
+        state: touch # directory --> for creating directory 
+       # state: absent
+
+    - name: Check the stat of the file 
+      stat:                   # Retrieve status information for a file
+        path: /opt/file1
+      register: file_status
+
+
+    #- name: Print the message
+    #  debug:
+    #    msg: "File is exist"
+    #  when: file_status.stat.exists == true 
+
+    - name: Print file status
+      debug:
+        msg: "{{ 'file is existing' if file_status.stat.exists == true else 'file not existing' }}"
