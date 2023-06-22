@@ -1,0 +1,15 @@
+---
+- name: deploy a jinja loop
+  hosts: test
+  become: yes
+  vars:
+    users:
+      - user1
+      - user2
+      - user3
+
+  tasks:
+    - name: deploy user template
+      template:
+        src: 03-jinja-loop.j2
+        dest: /etc/users

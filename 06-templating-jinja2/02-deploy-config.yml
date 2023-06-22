@@ -1,0 +1,15 @@
+---
+- name: deploy config - jinja2 example.
+  hosts: test
+  become: yes
+  vars:
+    ssh_port: 22
+    root_allowed: Yes
+    groups_allowed: No
+    passwords_allowed: Yes
+
+  tasks:
+    - name: Copy/deploy template
+      template:
+        src: 02-config.j2
+        dest: /etc/config.cfg

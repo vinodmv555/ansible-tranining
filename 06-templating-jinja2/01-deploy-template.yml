@@ -1,0 +1,12 @@
+---
+- name: jinja2 example
+  hosts: test
+  become: yes
+  vars:
+    app_user: app1
+
+  tasks:
+    - name: Deploy jinja2 template
+      template:
+        src: 01-app1.j2
+        dest: /etc/app1.cfg

@@ -1,0 +1,3 @@
+{% for myuser in users if not myuser == "root" %}
+   User number {{ loop.index }} - {{ myuser }}
+{% endfor %} 

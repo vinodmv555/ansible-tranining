@@ -1,0 +1,7 @@
+location /opt/app1
+
+serverName: {{ ansible_facts['hostname'] }}
+
+ipAddress: {{ ansible_facts['default_ipv4']['address'] }}
+
+user: {{ app_user }}

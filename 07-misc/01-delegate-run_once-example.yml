@@ -1,0 +1,23 @@
+---
+- name: Example for delegate to localhost
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: create a directory on localhost
+      file:
+        path: /opt/test
+        state: directory
+      delegate_to: localhost
+      run_once: yes
+
+    - name: Print a message
+      debug:
+        msg: "Test message for - delegeate and run once example"
+      delegate_to: localhost
+      run_once: yes
+
+
+    - name: Print a another message without delegate option
+      debug:
+        msg: "Test message without delegate option"

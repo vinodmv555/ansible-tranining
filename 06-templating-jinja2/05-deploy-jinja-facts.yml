@@ -1,0 +1,10 @@
+---
+- name: deploy a jinja loop
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: deploy user template
+      template:
+        src: 05-facts.j2
+        dest: /etc/facts
