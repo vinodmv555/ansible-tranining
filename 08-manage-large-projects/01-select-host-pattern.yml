@@ -1,0 +1,7 @@
+---
+- name: Select host pattern
+  hosts: node1.example.come,node2.example.com,node3.example.com # multiple servers seperated by comma
+  hosts: app1,app2,app3 # multiple groups seperated by comma
+  hosts: all # all the hosts in the inventory
+  hosts: node* # include all the servers and groups stars with node
+  hosts: app1,!node1.example.com # Run against the group app1, but it excludes the server node1.example.com from the group.

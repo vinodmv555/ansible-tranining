@@ -1,0 +1,37 @@
+---
+- name: set fact examples
+  hosts: test
+  become: yes
+
+  tasks:
+    - name: set variables
+      set_fact:
+        user: vinod
+        status: running 
+    
+    - name: print user and status
+      debug:
+        msg: "user is {{ user }} and status is {{ status }}"
+
+    - name: set a variable based on condtion
+      set_fact:
+        user1: tomcat
+      when: app_user == 'vinod'
+
+    - name: set a variable based on condtion
+      set_fact:
+        user1: tcserver
+      when: app_user != 'vinod'
+
+
+    - debug:
+        var: user1
+
+    - name: set a variable conditionaly 
+      set_fact:
+        user: "{{ 'tomcat' if app_user == 'vinod' else 'tcserver' }}"
+
+    - name: print user value
+      debug:
+        var: user
+    

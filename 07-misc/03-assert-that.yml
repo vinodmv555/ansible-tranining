@@ -1,0 +1,34 @@
+---
+- name: assert module example
+  hosts: test
+  become: yes
+  vars:
+    my_param: 86
+   
+  tasks:
+    - name: After version 2.7 both 'msg' and 'fail_msg' can customize failing assertion message
+      assert:
+        that:
+          - my_param <= 100
+          - my_param >= 0
+        fail_msg: "'my_param' must be between 0 and 100"
+        success_msg: "'my_param' is between 0 and 100"
+
+    
+    - name: uri module example
+      uri:
+        url: https://google.com
+        method: GET
+        body_format: json
+        status_code: 200,400
+      register: website_response
+
+   
+    - debug:
+        var: website_response.status 
+
+    - name: use assert 
+      assert:
+        that: website_response.status == 400
+        fail_msg: "website failed to access"
+        success_msg: "website is working"
